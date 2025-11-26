@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  localStorage.getItem("tasks");
-  if (tasks) {
-    parseTasks(JSON.parse(tasks["tasks"]));
+  function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    storedTasks.forEach((taskText) => addTask(taskText, false)); // 'false' indicates not to save again to Local Storage
   }
 
   const addButton = document.getElementById("add-task-btn");
