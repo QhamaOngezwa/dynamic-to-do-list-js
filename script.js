@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
 
-  function addTask() {
+  function addTask(taskText, save = true) {
     const taskText = taskInput.value.trim();
     if (taskText === "") {
       alert("Please enter a task.");
@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
       listItem.appendChild(removeButton);
       taskList.appendChild(listItem);
       taskInput.value = "";
+    }
+    if (save) {
+      const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+      storedTasks.push(taskText);
+      localStorage.setItem("tasks", JSON.stringify(storedTasks));
     }
   }
   addButton.addEventListener("click", addTask);
